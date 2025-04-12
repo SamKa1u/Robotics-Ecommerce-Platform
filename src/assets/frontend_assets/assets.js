@@ -177,7 +177,7 @@ export const products = [
     {
         _id: "aaaah",
         name: "LimX P1",
-        description: "",
+        description: "Introducing TRON 1, the first multi-modal biped robot! With its innovative \"Three-In-One\" modular design, TRON 1 can easily switch among Point-Foot, Sole, and Wheeled foot ends. TRON 1 supports full Python development, offers seamless Sim2Real deployment, and spins up RL research.",
         price: 53000.00,
         image: [p_img8_1,p_img8_2,p_img8_3,p_img8_4],
         category: "Legged Robots",

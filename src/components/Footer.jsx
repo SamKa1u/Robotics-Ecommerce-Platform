@@ -26,7 +26,7 @@ const Footer = () => {
                 <div>
                     <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
                     <ul className='flex flex-col gap-1 text-gray-600'>
-                        <li>+1 123-456-7890</li>
+                        <li>+1 (529) 342-0812</li>
                         <li>contact@Prometheus.com</li>
                     </ul>
                 </div>
@@ -36,6 +36,8 @@ const Footer = () => {
             <div>
                 <hr/>
                 <p className='py-5 text-sm text-center'>Copyright 2025@ Prometheus.com - All Rights Reserved.</p>
+                <hr/>
+                <p className='text-xs text-center'>E-Commerce Project : Samuel Kalu</p>
             </div>
         </div>
     )
