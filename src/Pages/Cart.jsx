@@ -3,6 +3,7 @@ import {ShopContext} from "../context/ShopContext.jsx";
 import Title from "../components/Title.jsx";
 import {assets} from "../assets/frontend_assets/assets.js";
 import CartTotal from "../components/CartTotal.jsx";
+import api from "../api/api.js";
 
 const Cart = () => {
 
@@ -11,17 +12,27 @@ const Cart = () => {
     const [cartData, setCartData] = useState([]);
 
     useEffect(() => {
-        const tempData = [];
-        for (const items in cartItems) {
-            if (cartItems[items] > 0) {
-                tempData.push({
-                    _id: items,
-                    quantity: cartItems[items],
-                })
+        const fetchCartData = async () => {
+            try {
+                const itemEntries = Object.entries(cartItems).filter(([_, qty]) => qty > 0);
+
+                const requests = itemEntries.map(([id]) => api.get(`/api/products/${id}`));
+                const responses = await Promise.all(requests);
+
+                const tempData = responses.map((res, idx) => ({
+                    ...res.data,
+                    quantity: itemEntries[idx][1],
+                }));
+
+                setCartData(tempData);
+            } catch (error) {
+                console.error('Failed to fetch cart data:', error);
             }
-        }
-        setCartData(tempData);
-    },[cartItems])
+    };
+
+    fetchCartData();
+}, [cartItems]);
+
 
     return (
         <div className='border-t pt-14'>
@@ -37,11 +48,21 @@ const Cart = () => {
                         return (
                             <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
                                 <div className='flex items-start gap-6'>
-                                    <img className='w-35 sm:w-20' src={productData.image[0]} alt='image' />
+                                    <img className='w-35 sm:w-20' src={item.image[0]} alt='image' />
                                     <div>
-                                        <p className='text-xs sm:text-lg font-medium'>{productData.name}</p>
+                                        <p className='text-xs sm:text-lg font-medium'>{item.name}</p>
                                         <div className='flex items-center gap-5 mt-2'>
-                                            <p>{currency}{productData.price}</p>
+                                            <p>{currency}{item.price}</p>
+                                            <input
+                                              onChange={(e) => {
+                                                const val = Number(e.target.value);
+                                                if (val > 0) updateQuantity(item._id, val);
+                                              }}
+                                              className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1'
+                                              type='number'
+                                              min={1}
+                                              defaultValue={item.quantity}
+                                            />
                                         </div>
                                     </div>
                                 </div>

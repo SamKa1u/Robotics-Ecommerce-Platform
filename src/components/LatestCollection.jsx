@@ -17,7 +17,7 @@ const LatestCollection = () => {
             <div className='text-center py-8 text-3x1'>
                 <Title text1={'NEW'} text2={'ARRIVALS'} />
                 <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>
-                    Rev up those fryers
+                    New New New!
                 </p>
             </div>
 
