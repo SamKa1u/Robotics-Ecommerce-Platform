@@ -3,27 +3,30 @@ import {ShopContext} from "../context/ShopContext.jsx";
 import {assets} from "../assets/frontend_assets/assets.js";
 import Title from "../components/Title.jsx";
 import ProductItem from "../components/ProductItem.jsx";
+import api from '../api/api.js';
 
 const Collection = () => {
 
-    const { products, search, showSearch } = useContext(ShopContext);
+    const { search, showSearch } = useContext(ShopContext);
     const [showFilter, setShowFilter] = useState(false);
     const [filterProducts, setFilterProducts] = useState([]);
     const [category, setCategory] = useState([]);
     const [subCategory, setSubCategory] = useState([]);
     const [sortType, setSortType] = useState('relevant')
 
-    // const hideSubCategories = () => {
-    //
-    //     if (category.length > 0){
-    //         if (category.value === 'Wheeled Robots') {
-    //             let wheel= true
-    //         }
-    //         else{
-    //             let wheel= false
-    //         }
-    //     }
-    // }
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await api.get('/api/products'); // Adjust if you need category-based fetch
+                setFilterProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []); // Empty dependency ensures it only runs once on initial load
+
     const toggleCategory = (e) => {
 
         if (category.includes(e.target.value)) {
@@ -46,7 +49,7 @@ const Collection = () => {
 
     const applyFilter =() =>{
 
-        let productsCopy = products.slice();
+        let productsCopy = filterProducts.slice();
 
         if (category.length > 0){
             productsCopy = productsCopy.filter(item => category.includes(item.category));
@@ -85,7 +88,7 @@ const Collection = () => {
 
     useEffect(()=>{
         sortProduct();
-    },[sortType])
+    },[sortType, filterProducts])
 
 
     return (
