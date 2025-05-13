@@ -37,7 +37,14 @@ cd frontend
 ```
 npm run dev
 ```
-
+<div class='flex flex-row'>
+  <img src='imgs/frontend/ecommerce1.PNG'/>
+  <img src='imgs/frontend/ecommerce4.PNG'/>
+  <img src='imgs/frontend/ecommerce5.PNG'/>
+  <img src='imgs/frontend/ecommerce6.PNG'/>
+  <img src='imgs/frontend/ecommerce7.PNG'/>
+</div>
+  
 ### Backend
 
 * In another terminal enter the backend directory and start the server 
@@ -47,8 +54,10 @@ npm run dev
 ```
 
 * Backend confirmation
-
-* Swagger Docs
+  <img src='imgs/backend/ecommerce8.PNG'/>
+  
+* Swagger API Documentation
+  <img src='imgs/backend/ecommerce9.PNG'/>
 
   
 ## Author
