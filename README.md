@@ -46,9 +46,9 @@ cd backend
 npm run dev
 ```
 
-*Backend confirmation
+* Backend confirmation
 
-*Swagger Docs
+* Swagger Docs
 
   
 ## Author
